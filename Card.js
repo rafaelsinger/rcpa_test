@@ -16,12 +16,11 @@ const styles = StyleSheet.create({
   container: {
     margin: 10,
     padding: 8,
-    width: "95%",
-    borderTopWidth: 3,
-    borderTopColor: "yellow",
+    width: "87.5%",
+    borderTopWidth: 4,
+    borderColor: "#DECA9D",
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: "grey"
   },
   title: {
     fontSize: 20,

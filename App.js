@@ -9,6 +9,7 @@ export default function App() {
   const [cards, setCards] = useState([]);
   const [search, setSearch] = useState("");
   const [filteredCards, setFilteredCards] = useState("");
+  const [searchFocused, setSearchFocused] = useState("black");
 
   useEffect(() => {
     getCards();
@@ -39,15 +40,26 @@ export default function App() {
     }
   }
 
+  const onSearchFocus = () => {
+    setSearchFocused('#DECA9D');
+  }
+
+  const onSearchBlur = () => {
+    setSearchFocused('black');
+  }
+
   return (
     <View style={styles.container}>
-      <ScrollView>
+      <ScrollView directionalLockEnabled={true} keyboardDismissMode='on-drag'>
         <View style={styles.header}>
           <Text style={styles.headerText}>Research Program on Children and Adversity</Text>
         </View>
         <View style={styles.search}>
           <Text style={styles.searchTitle}>Research Projects</Text>
-          <TextInput style={styles.searchBox} placeholder='Search Titles' onChangeText={(searchText) => {setSearch(searchText)}}></TextInput>
+          <TextInput style={[styles.searchBox, {borderColor: searchFocused}]} placeholder='Search Titles' 
+            onBlur={onSearchBlur}
+            onFocus={onSearchFocus}
+            onChangeText={(searchText) => {setSearch(searchText)}} />
         </View>
         <View style={styles.cardContainer}>
           {cards && displayCards().map((card, key) => (
@@ -60,12 +72,10 @@ export default function App() {
   );
 }
 
+
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    height: "100%"
   },
   search: {
     display: "flex",
@@ -75,24 +85,24 @@ const styles = StyleSheet.create({
   },
   searchTitle: {
     fontSize: 24,
-    marginBottom: 8,
+    marginBottom: 10,
   },
   searchBox: {
-    borderWidth: 1,
+    borderWidth: 1.5,
     width: "100%",
     padding: 10,
   },
   header: {
     flex: 1,
     padding: 30,
-    marginBottom: 16,
+    marginBottom: 4,
     width: "100%",
-    backgroundColor: "darkblue",
+    backgroundColor: "#023956",
     color: "white",
   },
   headerText: {
     color: "white",
-    fontSize: 30,
+    fontSize: 32,
     textAlign: "center"
   },
   cardContainer: {
